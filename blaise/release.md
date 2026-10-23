@@ -1,21 +1,11 @@
----
-name: release
-description: >-
-  RELEASE phase of /blaise: when the feature is implementation-complete,
-  update documentation and marketing materials, then finish the feature branch
-  (merge/PR/keep). Use when /blaise is in RELEASE or the feature is ready to
-  ship externally.
-disable-model-invocation: true
----
-
-# release
+# RELEASE
 
 Input: BUILD complete (issues closed, umbrella PR CI green).  
 Output: release artifacts (docs/marketing as needed) + human-chosen integrate path.
 
 ## Sub-skill
 
-For branch integration options, follow **`finishing-a-development-branch`** (verify tests → present merge / push-PR / keep menu). This skill runs **before** that menu when docs or marketing are in scope.
+For branch integration options, follow **`finishing-a-development-branch`** (verify tests → present merge / push-PR / keep menu). This phase runs **before** that menu when docs or marketing are in scope.
 
 ## Steps
 
@@ -26,11 +16,11 @@ Fresh evidence only:
 - Local full test suite
 - `gh pr checks` on the umbrella PR — all required green
 
-If not green, return to [build](../build/SKILL.md).
+If not green, return to [build.md](build.md).
 
 ### 2. Release scope check
 
-Defaults by track (see [blaise](../blaise/SKILL.md)):
+Defaults by track (see [SKILL.md](SKILL.md)):
 
 | Track | Default |
 |-------|---------|

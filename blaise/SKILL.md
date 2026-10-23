@@ -21,7 +21,7 @@ classify → (SPEC?) → (PLAN?) → BUILD → RELEASE
 
 ## Classify first (HARD GATE)
 
-Before SPEC or any phase skill, **classify and say it out loud** so the human can override:
+Before SPEC or any phase, **classify and say it out loud** so the human can override:
 
 > "This looks like a **task** — I'll skip the written spec and use a short in-chat design + one GitHub issue."
 
@@ -29,7 +29,7 @@ Before SPEC or any phase skill, **classify and say it out loud** so the human ca
 |-------|------------|------|
 | **hotfix** | Clear bug/fix in an existing flow; roughly one commit; acceptance already obvious (or an existing issue states it) | Skip SPEC. Skip plan file. Branch + TDD + CI. One GitHub issue (create or use existing). RELEASE = finish branch only (no docs/marketing unless asked). |
 | **task** | Bounded change to code that already exists; a few files; success criteria fit in a short paragraph | Skip written SPEC. Short **in-chat design** → human yes. Light PLAN: usually **one** GitHub issue (parent optional); plan file only if >1 task or non-obvious steps. Then BUILD → RELEASE (docs only if behavior is user-visible and they want it). |
-| **feature** | New capability/subsystem, multiple flows, unclear requirements, or will need several stacked tasks | Full [spec](../spec/SKILL.md) → [plan](../plan/SKILL.md) → [build](../build/SKILL.md) → [release](../release/SKILL.md) |
+| **feature** | New capability/subsystem, multiple flows, unclear requirements, or will need several stacked tasks | Full [spec](spec.md) → [plan](plan.md) → [build](build.md) → [release](release.md) |
 
 **Signals → track**
 
@@ -54,12 +54,14 @@ When in doubt between two tracks, take the **heavier** one. Ratchet **up** mid-f
 
 ## Phase map (by track)
 
-| Phase | Skill | hotfix | task | feature |
-|-------|-------|:------:|:----:|:-------:|
-| SPEC | [spec](../spec/SKILL.md) | — | — (chat design in boot) | required |
-| PLAN | [plan](../plan/SKILL.md) | issue + branch + PR only | light | full |
-| BUILD | [build](../build/SKILL.md) | required | required | required |
-| RELEASE | [release](../release/SKILL.md) | finish only | finish; docs optional | full menu |
+Read the phase file when entering that phase (only `/blaise` is a discoverable skill):
+
+| Phase | File | hotfix | task | feature |
+|-------|------|:------:|:----:|:-------:|
+| SPEC | [spec.md](spec.md) | — | — (chat design in boot) | required |
+| PLAN | [plan.md](plan.md) | issue + branch + PR only | light | full |
+| BUILD | [build.md](build.md) | required | required | required |
+| RELEASE | [release.md](release.md) | finish only | finish; docs optional | full menu |
 
 Never skip a gate that the **chosen track** still requires. Resume at the earliest incomplete step for that track.
 

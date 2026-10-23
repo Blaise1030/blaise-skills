@@ -1,16 +1,6 @@
----
-name: plan
-description: >-
-  PLAN phase of /blaise: create GitHub Issues, a stacked branch, and an
-  umbrella PR — full plan file for feature track, light/single-issue for
-  task/hotfix. Use when /blaise is in PLAN or the user wants issue-backed
-  planning on one feature branch.
-disable-model-invocation: true
----
+# PLAN
 
-# plan
-
-Output: GitHub Issues + branch + umbrella PR (draft OK). Plan **file** depth depends on track (see [blaise](../blaise/SKILL.md)).
+Output: GitHub Issues + branch + umbrella PR (draft OK). Plan **file** depth depends on track (see [SKILL.md](SKILL.md)).
 
 | Track | Input | Plan file | Issues |
 |-------|-------|-----------|--------|
@@ -108,7 +98,7 @@ Present what exists (plan path if any, issue list, branch, PR URL). Ask:
 > Ready to start BUILD?
 
 **hotfix:** if the human already said "just fix it" and the issue/PR exist, proceed without a second gate.  
-**task / feature:** **Stop** until explicit approval. Then hand off to [build](../build/SKILL.md).
+**task / feature:** **Stop** until explicit approval. Then hand off to [build.md](build.md).
 
 ## Anti-patterns
 

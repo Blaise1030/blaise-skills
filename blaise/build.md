@@ -1,14 +1,4 @@
----
-name: build
-description: >-
-  BUILD phase of /blaise: TDD implementation of planned GitHub Issues on one
-  stacked feature branch, watching the umbrella PR's GitHub Actions until all
-  tasks are done. Use when /blaise is in BUILD or the user wants to execute a
-  blaise plan against CI.
-disable-model-invocation: true
----
-
-# build
+# BUILD
 
 Input: GitHub Issues + branch + umbrella PR (plus plan file on **feature** track).  
 Output: all tasks implemented (TDD), issues closed, **PR CI green**.
@@ -56,7 +46,7 @@ All of:
 - [ ] Umbrella PR: all required GitHub Actions checks green (fresh `gh pr checks`)
 - [ ] PR body lists issues and points at spec/plan
 
-Then hand off to [release](../release/SKILL.md). Do not merge to default branch in BUILD.
+Then hand off to [release.md](release.md). Do not merge to default branch in BUILD.
 
 ## Anti-patterns
 
