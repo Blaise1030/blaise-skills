@@ -1,15 +1,20 @@
 ---
 name: spec
 description: >-
-  SPEC phase of /blaise: turn a feature idea into an approved written
-  requirements/design spec. Use when /blaise is in SPEC, or the user asks to
-  spec/requirements a feature before planning issues.
+  SPEC phase of /blaise (feature track only): turn a feature idea into an
+  approved written requirements/design spec. Use when /blaise classified the
+  work as feature, or the user explicitly asks for a written spec. Do not use
+  for hotfix/task tracks — those skip this skill.
 disable-model-invocation: true
 ---
 
 # spec
 
 Produce a **written spec** the human explicitly approves. No plan, issues, or product code in this phase.
+
+## When this skill applies
+
+Only the **feature** track (see [blaise](../blaise/SKILL.md) classify). If track is hotfix or task, **do not enter this skill** — return to the orchestrator path (chat design or straight to PLAN/BUILD).
 
 ## Sub-skill
 

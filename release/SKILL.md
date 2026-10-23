@@ -30,7 +30,15 @@ If not green, return to [build](../build/SKILL.md).
 
 ### 2. Release scope check
 
-Ask once (skip if the human already specified):
+Defaults by track (see [blaise](../blaise/SKILL.md)):
+
+| Track | Default |
+|-------|---------|
+| **hotfix** | Skip artifacts — finish the branch only |
+| **task** | Finish only; ask about docs if user-visible behavior changed |
+| **feature** | Ask the menu below |
+
+Ask once when the default is not "finish only", or when unsure (skip if the human already specified):
 
 > RELEASE — what should we produce beyond merging?
 > 1. User-facing docs only  

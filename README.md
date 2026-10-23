@@ -6,7 +6,9 @@ Public Cursor skill pack for **`/blaise`** — feature orchestration on one stac
 SPEC → PLAN → BUILD → RELEASE
 ```
 
-Parallel alternative to Superpowers **slice-driven-development** (many PRs off main). This pack stacks work on `feature/<slug>`, tracks tasks as GitHub Issues, TDD-builds against the umbrella PR’s GitHub Actions, then handles docs/marketing before integrate.
+Parallel alternative to Superpowers **slice-driven-development** (many PRs off main). This pack stacks work on one branch, tracks tasks as GitHub Issues, TDD-builds against the umbrella PR’s GitHub Actions, then handles docs/marketing before integrate.
+
+**Sized paths:** `/blaise` classifies **hotfix** / **task** / **feature** first. Small work skips the written SPEC (and often the plan file); only the feature track runs the full SPEC → PLAN → BUILD → RELEASE ceremony.
 
 ## Skills
 

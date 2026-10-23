@@ -1,42 +1,67 @@
 ---
 name: blaise
 description: >-
-  Orchestrate feature development through SPEC → PLAN → BUILD → RELEASE on one
-  stacked feature branch with GitHub Issues. Use when the user invokes /blaise,
-  asks to run the blaise workflow, or wants a full feature cycle (requirements,
-  issue-backed plan, TDD build with CI, then release docs/marketing) as a
-  parallel alternative to slice-driven-development.
+  Orchestrate work through SPEC → PLAN → BUILD → RELEASE on one stacked
+  feature branch with GitHub Issues, scaled by size (hotfix / task / feature).
+  Use when the user invokes /blaise, asks to run the blaise workflow, or wants
+  a gated cycle from requirements to ship — including small issues that should
+  skip the written spec. Parallel alternative to slice-driven-development.
 disable-model-invocation: true
 ---
 
 # /blaise — Feature Orchestration
 
-Ship a feature as **one stacked feature branch**, tracked by **GitHub Issues**, through four hard-gated phases.
+Ship work on **one stacked branch**, tracked by **GitHub Issues**, through phases scaled to size.
 
 ```
-SPEC → PLAN → BUILD → RELEASE
+classify → (SPEC?) → (PLAN?) → BUILD → RELEASE
 ```
 
-**Parallel alternative** to `slice-driven-development` (many PRs off main). Here: one `feature/<slug>` branch, ordered issues, one umbrella PR, TDD + CI until done, then release artifacts.
+**Parallel alternative** to `slice-driven-development` (many PRs off main). Here: one branch, ordered issues when needed, umbrella PR, TDD + CI, then optional release artifacts.
 
-## When to use
+## Classify first (HARD GATE)
 
-- User invokes `/blaise` or names this skill
-- Multi-step feature that needs requirements → plan → implementation → ship
-- Prefer a single feature branch over one-PR-per-slice
+Before SPEC or any phase skill, **classify and say it out loud** so the human can override:
 
-**Not for:** tiny bounded fixes (use normal TDD), spikes, or pure bug hunts (use systematic-debugging).
+> "This looks like a **task** — I'll skip the written spec and use a short in-chat design + one GitHub issue."
 
-## Phase map
+| Track | What it is | Path |
+|-------|------------|------|
+| **hotfix** | Clear bug/fix in an existing flow; roughly one commit; acceptance already obvious (or an existing issue states it) | Skip SPEC. Skip plan file. Branch + TDD + CI. One GitHub issue (create or use existing). RELEASE = finish branch only (no docs/marketing unless asked). |
+| **task** | Bounded change to code that already exists; a few files; success criteria fit in a short paragraph | Skip written SPEC. Short **in-chat design** → human yes. Light PLAN: usually **one** GitHub issue (parent optional); plan file only if >1 task or non-obvious steps. Then BUILD → RELEASE (docs only if behavior is user-visible and they want it). |
+| **feature** | New capability/subsystem, multiple flows, unclear requirements, or will need several stacked tasks | Full [spec](../spec/SKILL.md) → [plan](../plan/SKILL.md) → [build](../build/SKILL.md) → [release](../release/SKILL.md) |
 
-| Phase | Skill | Exit gate |
-|-------|-------|-----------|
-| 1 SPEC | [spec](../spec/SKILL.md) | Human approves written spec |
-| 2 PLAN | [plan](../plan/SKILL.md) | Human approves plan + issues + feature branch |
-| 3 BUILD | [build](../build/SKILL.md) | All issue tasks done, umbrella PR CI green |
-| 4 RELEASE | [release](../release/SKILL.md) | Docs/marketing done; human chooses integrate/ship |
+**Signals → track**
 
-Do phases in order. Never skip an approval gate. Resume at the earliest incomplete phase.
+| Prefer | When you see |
+|--------|----------------|
+| hotfix | "fix typo", "null check", "CI flake", existing `#N` with a one-line ask, repro already known |
+| task | "add flag", "extend endpoint", "small UI tweak", single user flow, repo already has the pattern |
+| feature | "add X", new surface area, data model changes, multiple personas/flows, partner still exploring |
+
+When in doubt between two tracks, take the **heavier** one. Ratchet **up** mid-flight if hidden complexity appears (stop, say so, upgrade). Do not silently downgrade.
+
+**Human override wins.** If they say "just fix it" / "no spec", treat as hotfix or task. If they say "full blaise" / "write a spec", use feature.
+
+### Anti-pattern: forcing SPEC on small work
+
+| Thought | Reality |
+|---------|---------|
+| "/blaise always means write a design doc" | /blaise means classify, then only the phases that track needs |
+| "Safer to always SPEC" | Wrong track wastes their time; task/hotfix still have an approval gate (chat design or obvious fix) |
+| "There's an issue number so it's a feature" | Issue size ≠ feature track — read the issue body |
+| "I'll SPEC lightly in a file anyway" | Task track: no spec file. Chat design only |
+
+## Phase map (by track)
+
+| Phase | Skill | hotfix | task | feature |
+|-------|-------|:------:|:----:|:-------:|
+| SPEC | [spec](../spec/SKILL.md) | — | — (chat design in boot) | required |
+| PLAN | [plan](../plan/SKILL.md) | issue + branch + PR only | light | full |
+| BUILD | [build](../build/SKILL.md) | required | required | required |
+| RELEASE | [release](../release/SKILL.md) | finish only | finish; docs optional | full menu |
+
+Never skip a gate that the **chosen track** still requires. Resume at the earliest incomplete step for that track.
 
 ## Superpowers references
 
@@ -44,28 +69,31 @@ If Superpowers (or the project's `.agents/skills`) is installed, **read and foll
 
 | Phase | Prefer |
 |-------|--------|
-| SPEC | `brainstorming` (architectural path → design doc) |
-| PLAN | `writing-plans` for task granularity/TDD steps; issue creation is GitHub-only (this pack) |
-| BUILD | `test-driven-development`, `verification-before-completion`, `systematic-debugging`; optional `subagent-driven-development` / `executing-plans` for task execution style |
-| RELEASE | `finishing-a-development-branch` for merge/PR/keep menu; this pack adds docs/marketing |
+| SPEC (feature) | `brainstorming` architectural path |
+| Chat design (task) | `brainstorming` bounded path (in-chat only; no spec file) |
+| PLAN | `writing-plans` for task shape when a plan file exists; tracker always GitHub Issues |
+| BUILD | `test-driven-development`, `verification-before-completion`, `systematic-debugging`; optional `subagent-driven-development` / `executing-plans` |
+| RELEASE | `finishing-a-development-branch`; this pack adds docs/marketing when in scope |
 
-Announce: `Using blaise → <phase> (<sub-skill if any>)`.
+Announce: `Using blaise → <track> → <phase>`.
 
 ## Boot sequence
 
-1. **Announce** `/blaise` and detect resume vs fresh start (spec/plan paths, open feature PR, open issues).
-2. **Repo facts** (record in the spec): default branch, `gh` auth, PR CI workflow names, test commands, docs locations.
-3. **Tracker is always GitHub Issues** in the current repo (`gh issue`). Optional: add cards to a GitHub Project if the human names one — never invent a project.
-4. **Enter the earliest incomplete phase** — read that phase's SKILL.md and follow it exactly.
-5. Between phases: stop for the exit gate; do not auto-advance on silence.
+1. **Announce** `/blaise`.
+2. **Classify** hotfix | task | feature; state it; allow override.
+3. **Resume?** If spec/plan/branch/PR/issues already exist, continue that track — don't re-SPEC.
+4. **Repo facts:** default branch, `gh` auth, PR CI checks, test command.
+5. **Tracker:** always GitHub Issues (`gh issue`). Optional Project only if the human names one.
+6. **Enter the path for the track** (table above). For **task**: do the short in-chat design here, get yes, then PLAN/BUILD as needed. For **hotfix**: confirm the fix target in one sentence, then branch + BUILD.
+7. Between required gates: **stop**; do not auto-advance on silence.
 
 ## Feature branch contract
 
-- Branch: `feature/<slug>` from up-to-date default branch
-- One umbrella PR (draft from PLAN onward is fine)
-- Issues are the task units; work stacks as commits on that branch (not separate PRs per issue unless the human asks)
-- Issue bodies carry `Blocked by: #N` for ordering
-- Parent/epic issue links spec + plan + umbrella PR; closes only after RELEASE (or human declines release work and accepts merge)
+- Branch: `feature/<slug>` or `fix/<slug>` (hotfix) from up-to-date default branch
+- One umbrella PR (draft early is fine)
+- Issues are task units; stack commits on that branch
+- `Blocked by: #N` when multiple issues
+- Parent/epic issue only when there are **multiple** child tasks (feature, or task with >1 issue). Hotfix: single issue is enough; close it when CI green and finished
 
 ## Stop conditions (any phase)
 
@@ -73,16 +101,14 @@ Stop and ask only for: irreversible/destructive ops, security-sensitive actions,
 
 ## Progress ledger
 
-Keep a short in-chat or `docs/blaise/<slug>/progress.md` ledger:
-
 ```markdown
-# <Feature> — blaise progress
-- Phase: SPEC | PLAN | BUILD | RELEASE
-- Spec: <path>
-- Plan: <path>
-- Branch: feature/<slug>
+# <Work> — blaise progress
+- Track: hotfix | task | feature
+- Phase: SPEC | PLAN | BUILD | RELEASE | (skipped …)
+- Spec: <path | none — task/hotfix>
+- Plan: <path | none>
+- Branch: feature/<slug> | fix/<slug>
 - Umbrella PR: <url>
-- Parent issue: <#n>
-- Issues: #a (done) → #b (in progress) → #c (blocked)
-- Ruling: <decisions>
+- Issues: …
+- Ruling: …
 ```

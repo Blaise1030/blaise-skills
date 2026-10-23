@@ -1,26 +1,34 @@
 ---
 name: plan
 description: >-
-  PLAN phase of /blaise: turn an approved spec into a stacked implementation
-  plan, GitHub Issues (parent + ordered tasks), a feature branch, and an
-  umbrella PR. Use when /blaise is in PLAN or the user wants issue-backed
+  PLAN phase of /blaise: create GitHub Issues, a stacked branch, and an
+  umbrella PR — full plan file for feature track, light/single-issue for
+  task/hotfix. Use when /blaise is in PLAN or the user wants issue-backed
   planning on one feature branch.
 disable-model-invocation: true
 ---
 
 # plan
 
-Input: **approved spec**. Output: plan file + GitHub Issues + `feature/<slug>` + umbrella PR (draft OK).
+Output: GitHub Issues + branch + umbrella PR (draft OK). Plan **file** depth depends on track (see [blaise](../blaise/SKILL.md)).
+
+| Track | Input | Plan file | Issues |
+|-------|-------|-----------|--------|
+| **feature** | approved written spec | full `writing-plans` style | parent + one per task |
+| **task** | approved in-chat design | only if >1 task or steps non-obvious; else skip file | usually one issue |
+| **hotfix** | one-sentence fix target (or existing `#N`) | skip | one issue (or reuse `#N`) |
 
 ## Sub-skill
 
-If available, follow **`writing-plans`** for task shape (TDD steps, interfaces, checkboxes). Ignore its multi-PR / subagent handoff menus when they conflict — /blaise uses **one stacked feature branch** and always **GitHub Issues**.
+If available and a plan file is warranted, follow **`writing-plans`** for task shape. Ignore multi-PR handoff menus — /blaise stacks on one branch. Tracker always **GitHub Issues**.
 
 ## Steps
 
-### 1. Write the plan
+### 1. Write the plan (feature; optional task)
 
-Save to `docs/superpowers/plans/YYYY-MM-DD-<feature>.md` (or project plan dir).
+**hotfix:** skip this step.  
+**task with a single obvious issue:** skip the file; put acceptance criteria in the issue body.  
+**feature (or multi-task):** save to `docs/superpowers/plans/YYYY-MM-DD-<feature>.md` (or project plan dir).
 
 Header must include:
 
@@ -53,13 +61,17 @@ Self-review against the spec (coverage, type consistency, no transcript-of-code)
 
 Use `gh` against the **current repo**. Never switch to Linear/Jira.
 
+**hotfix / single-issue task:** one issue (or comment on existing `#N`) with acceptance criteria + definition of done. No parent.
+
+**feature / multi-task:**
+
 1. **Parent issue** — title `[Feature] <name>`; body links spec + plan; lists child task outline.
 2. **One issue per task** — body includes:
    - Task section from the plan (verbatim or faithful)
    - Definition of done: tests pass locally, umbrella PR CI green for the commits that close this, issue closable
    - `Blocked by: #N` for dependencies (omit if none)
-3. Write every issue number/URL back into the plan.
-4. Optional: if the human named a **GitHub Project**, add the issues (`gh project item-add` or UI instructions). Do not create a project unasked.
+3. Write every issue number/URL back into the plan (if any).
+4. Optional: if the human named a **GitHub Project**, add the issues. Do not create a project unasked.
 
 ### 3. Feature branch + umbrella PR
 
@@ -91,11 +103,12 @@ Link the PR on the parent issue and in the plan header.
 
 ### 4. Gate
 
-Present plan path, issue list (with blockers), branch, PR URL. Ask:
+Present what exists (plan path if any, issue list, branch, PR URL). Ask:
 
-> Plan, issues, and draft PR are ready. Approve to start BUILD?
+> Ready to start BUILD?
 
-**Stop** until explicit approval. Then hand off to [build](../build/SKILL.md).
+**hotfix:** if the human already said "just fix it" and the issue/PR exist, proceed without a second gate.  
+**task / feature:** **Stop** until explicit approval. Then hand off to [build](../build/SKILL.md).
 
 ## Anti-patterns
 

@@ -10,8 +10,10 @@ disable-model-invocation: true
 
 # build
 
-Input: approved plan + GitHub Issues + `feature/<slug>` + umbrella PR.  
+Input: GitHub Issues + branch + umbrella PR (plus plan file on **feature** track).  
 Output: all tasks implemented (TDD), issues closed, **PR CI green**.
+
+Works for hotfix/task/feature — same TDD + CI loop; fewer issues on lighter tracks.
 
 ## Sub-skills
 
