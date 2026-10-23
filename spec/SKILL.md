@@ -1,5 +1,5 @@
 ---
-name: blaise-spec
+name: spec
 description: >-
   SPEC phase of /blaise: turn a feature idea into an approved written
   requirements/design spec. Use when /blaise is in SPEC, or the user asks to
@@ -7,7 +7,7 @@ description: >-
 disable-model-invocation: true
 ---
 
-# blaise-spec
+# spec
 
 Produce a **written spec** the human explicitly approves. No plan, issues, or product code in this phase.
 
@@ -41,4 +41,4 @@ If available, follow **`brainstorming`** (architectural path). This skill only a
 
 ## Exit
 
-Hand off to [blaise-plan](../blaise-plan/SKILL.md) only after explicit approval of the spec file.
+Hand off to [plan](../plan/SKILL.md) only after explicit approval of the spec file.

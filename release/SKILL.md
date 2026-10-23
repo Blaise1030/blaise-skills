@@ -1,5 +1,5 @@
 ---
-name: blaise-release
+name: release
 description: >-
   RELEASE phase of /blaise: when the feature is implementation-complete,
   update documentation and marketing materials, then finish the feature branch
@@ -8,7 +8,7 @@ description: >-
 disable-model-invocation: true
 ---
 
-# blaise-release
+# release
 
 Input: BUILD complete (issues closed, umbrella PR CI green).  
 Output: release artifacts (docs/marketing as needed) + human-chosen integrate path.
@@ -26,7 +26,7 @@ Fresh evidence only:
 - Local full test suite
 - `gh pr checks` on the umbrella PR — all required green
 
-If not green, return to [blaise-build](../blaise-build/SKILL.md).
+If not green, return to [build](../build/SKILL.md).
 
 ### 2. Release scope check
 

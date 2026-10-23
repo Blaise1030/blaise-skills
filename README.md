@@ -13,10 +13,10 @@ Parallel alternative to Superpowers **slice-driven-development** (many PRs off m
 | Skill | Role |
 |-------|------|
 | [`blaise`](blaise/SKILL.md) | Orchestrator — invoke with `/blaise` |
-| [`blaise-spec`](blaise-spec/SKILL.md) | Requirements / design spec |
-| [`blaise-plan`](blaise-plan/SKILL.md) | Implementation plan + GitHub Issues + feature branch + draft PR |
-| [`blaise-build`](blaise-build/SKILL.md) | TDD + CI watch until issues done |
-| [`blaise-release`](blaise-release/SKILL.md) | Docs / marketing + finish branch |
+| [`spec`](spec/SKILL.md) | Requirements / design spec |
+| [`plan`](plan/SKILL.md) | Implementation plan + GitHub Issues + feature branch + draft PR |
+| [`build`](build/SKILL.md) | TDD + CI watch until issues done |
+| [`release`](release/SKILL.md) | Docs / marketing + finish branch |
 
 ## Install (Cursor)
 
@@ -26,10 +26,10 @@ Clone into your personal skills directory (or copy the five folders):
 git clone https://github.com/Blaise1030/blaise-skills.git ~/.cursor/skills/blaise-skills
 # Cursor discovers SKILL.md under ~/.cursor/skills/** — symlink the skill dirs if your version only scans one level:
 ln -s ~/.cursor/skills/blaise-skills/blaise ~/.cursor/skills/blaise
-ln -s ~/.cursor/skills/blaise-skills/blaise-spec ~/.cursor/skills/blaise-spec
-ln -s ~/.cursor/skills/blaise-skills/blaise-plan ~/.cursor/skills/blaise-plan
-ln -s ~/.cursor/skills/blaise-skills/blaise-build ~/.cursor/skills/blaise-build
-ln -s ~/.cursor/skills/blaise-skills/blaise-release ~/.cursor/skills/blaise-release
+ln -s ~/.cursor/skills/blaise-skills/spec ~/.cursor/skills/spec
+ln -s ~/.cursor/skills/blaise-skills/plan ~/.cursor/skills/plan
+ln -s ~/.cursor/skills/blaise-skills/build ~/.cursor/skills/build
+ln -s ~/.cursor/skills/blaise-skills/release ~/.cursor/skills/release
 ```
 
 Then invoke **`/blaise`** in Agent chat.

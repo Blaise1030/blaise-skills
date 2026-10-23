@@ -1,5 +1,5 @@
 ---
-name: blaise-plan
+name: plan
 description: >-
   PLAN phase of /blaise: turn an approved spec into a stacked implementation
   plan, GitHub Issues (parent + ordered tasks), a feature branch, and an
@@ -8,7 +8,7 @@ description: >-
 disable-model-invocation: true
 ---
 
-# blaise-plan
+# plan
 
 Input: **approved spec**. Output: plan file + GitHub Issues + `feature/<slug>` + umbrella PR (draft OK).
 
@@ -27,7 +27,7 @@ Header must include:
 ```markdown
 # <Feature> Implementation Plan
 
-> **/blaise:** Execute with blaise-build on branch `feature/<slug>`. Tracker: GitHub Issues.
+> **/blaise:** Execute with build on branch `feature/<slug>`. Tracker: GitHub Issues.
 
 **Goal:** …
 **Architecture:** …
@@ -95,7 +95,7 @@ Present plan path, issue list (with blockers), branch, PR URL. Ask:
 
 > Plan, issues, and draft PR are ready. Approve to start BUILD?
 
-**Stop** until explicit approval. Then hand off to [blaise-build](../blaise-build/SKILL.md).
+**Stop** until explicit approval. Then hand off to [build](../build/SKILL.md).
 
 ## Anti-patterns
 

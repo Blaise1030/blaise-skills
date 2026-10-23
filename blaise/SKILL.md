@@ -31,10 +31,10 @@ SPEC → PLAN → BUILD → RELEASE
 
 | Phase | Skill | Exit gate |
 |-------|-------|-----------|
-| 1 SPEC | [blaise-spec](../blaise-spec/SKILL.md) | Human approves written spec |
-| 2 PLAN | [blaise-plan](../blaise-plan/SKILL.md) | Human approves plan + issues + feature branch |
-| 3 BUILD | [blaise-build](../blaise-build/SKILL.md) | All issue tasks done, umbrella PR CI green |
-| 4 RELEASE | [blaise-release](../blaise-release/SKILL.md) | Docs/marketing done; human chooses integrate/ship |
+| 1 SPEC | [spec](../spec/SKILL.md) | Human approves written spec |
+| 2 PLAN | [plan](../plan/SKILL.md) | Human approves plan + issues + feature branch |
+| 3 BUILD | [build](../build/SKILL.md) | All issue tasks done, umbrella PR CI green |
+| 4 RELEASE | [release](../release/SKILL.md) | Docs/marketing done; human chooses integrate/ship |
 
 Do phases in order. Never skip an approval gate. Resume at the earliest incomplete phase.
 
